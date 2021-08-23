@@ -14,4 +14,8 @@ module.exports = async function(deployer, network, accounts) {
         const proxy = await deployer.deploy(ExchangeProxy, WETH);
         await proxy.setRegistry(BRegistry.address);
     }
+
+    await deployer.deploy(BRegistry, process.env.BFACTORY_ADDRESS)
+    const proxy = await deployer.deploy(ExchangeProxy, process.env.WETH_ADDRESS);
+    await proxy.setRegistry(BRegistry.address);
 }
